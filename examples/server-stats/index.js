@@ -17,26 +17,21 @@ const wss = new WebSocketServer({ server });
 
 wss.on('connection', function (ws) {
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
+    const info = JSON.parse(data)
+    logger.info(info.key1);
+    logger.security('received: %s', info.key2);
   });
 
-  ws.send('something');
+  ws.send('You are connected to Logging Server');
   
-  const id = setInterval(function () {
-    ws.send(JSON.stringify(process.memoryUsage()), function () {
-      //
-      // Ignore errors.
-      //
-    });
-  }, 100);
-  console.log('started client interval');
+  logger.info('started client interval');
 
   ws.on('close', function () {
-    console.log('stopping client interval');
+    logger.info('stopping client interval');
     clearInterval(id);
   });
 });
 
 server.listen(8080, function () {
-  console.log('Listening on http://localhost:8080');
+  logger.info('Listening on http://localhost:8080');
 });

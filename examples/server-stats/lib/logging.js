@@ -11,7 +11,7 @@ const logLevels = {
   security: -1
 };
 
-winston.addColors({ security: "rainbow" });
+winston.addColors({ security: "inverse" });
 
 const securityFilter = winston.format((info, opts) => {
   return info.level === 'security' ? info : false;
