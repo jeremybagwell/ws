@@ -13,6 +13,12 @@ const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
 wss.on('connection', function (ws) {
+  ws.on('message', function message(data) {
+    console.log('received: %s', data);
+  });
+
+  ws.send('something');
+  
   const id = setInterval(function () {
     ws.send(JSON.stringify(process.memoryUsage()), function () {
       //
