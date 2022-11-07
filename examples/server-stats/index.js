@@ -3,6 +3,9 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
+//logging
+const logger = require('./lib/logging.js')("index.js")
+
 
 const { WebSocketServer } = require('../..');
 
